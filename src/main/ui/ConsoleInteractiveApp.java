@@ -63,7 +63,13 @@ public class ConsoleInteractiveApp {
             createPet();
         } else if (command.equals("a")) {
             adoptPetFromPets();
-        }
+        } else if (command.equals("v"))
+            viewList();
+    }
+
+    // EFFECTS: view the list of pet
+    private void viewList() {
+        printPets();
     }
 
     // MODIFIES: pets
@@ -101,6 +107,7 @@ public class ConsoleInteractiveApp {
         System.out.println("Do you have a pet for adoption or do you want to adopt a pet?");
         System.out.println("p - posting a pet for adoption");
         System.out.println("a - adopting a pet");
+        System.out.println("v - view the list of pets");
         System.out.println("q - quit");
     }
 
