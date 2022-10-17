@@ -63,8 +63,9 @@ public class ConsoleInteractiveApp {
             createPet();
         } else if (command.equals("a")) {
             adoptPetFromPets();
-        } else if (command.equals("v"))
+        } else if (command.equals("v")) {
             viewList();
+        }
     }
 
     // EFFECTS: view the list of pet
