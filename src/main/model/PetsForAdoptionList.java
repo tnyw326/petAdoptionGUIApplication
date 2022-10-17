@@ -28,9 +28,10 @@ public class PetsForAdoptionList {
      *          list is empty, do nothing
      */
     public void adoptPet(String name) {
-        for (Pet pet : pets) {
-            if (name == pet.getName()) {
-                pets.remove(pet);
+        for (int i = 0; i < pets.size(); i++) {
+            String petName = pets.get(i).getName();
+            if (name == petName) {
+                pets.remove(i);
             }
         }
     }

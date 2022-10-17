@@ -54,7 +54,6 @@ public class ConsoleInteractiveApp {
         pets.addPet(teddy);
 
         input = new Scanner(System.in);
-        input.useDelimiter("\n");
     }
 
     // MODIFIES: this
@@ -75,7 +74,7 @@ public class ConsoleInteractiveApp {
         System.out.println("\nplease enter the name of the pet that you want to adopt");
         String nameOfPetInterested = input.next();
         pets.adoptPet(nameOfPetInterested);
-        System.out.println("Congratulations!");
+        System.out.println("Congratulations! You've adopted a pet!");
     }
 
     // MODIFIES: pets
