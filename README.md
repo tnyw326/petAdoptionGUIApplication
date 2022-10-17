@@ -19,6 +19,7 @@ I am interested of making this project because I love animals and I really want 
 
 **User Story**
 
+- as a user, I want to be able to post an animal for adoption
 - as a user, I want to be able to add an animal to my "animal waiting for adoption" list
 - as a user, I want to be able to view information of the animals
 - as a user, I want to be able to select an animal for adoption

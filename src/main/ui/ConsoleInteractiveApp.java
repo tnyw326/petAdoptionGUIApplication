@@ -29,7 +29,7 @@ public class ConsoleInteractiveApp {
             showOptions();
             command = input.next();
 
-            if (command.equals("quit")) {
+            if (command.equals("q")) {
                 keepGoing = false;
             } else {
                 runCommand(command);
@@ -73,12 +73,8 @@ public class ConsoleInteractiveApp {
         printPets();
         System.out.println("\nplease enter the name of the pet that you want to adopt");
         String nameOfPetInterested = input.next();
-        if (pets.containsPet(nameOfPetInterested)) {
-            pets.adoptPet(nameOfPetInterested);
-            System.out.println("Congratulations! You've adopted " + nameOfPetInterested);
-        } else {
-            System.out.println("Sorry, " + nameOfPetInterested + " does not seem to appear in the list");
-        }
+        pets.adoptPet(nameOfPetInterested);
+        System.out.println("Congratulations! You've adopted " + nameOfPetInterested);
     }
 
     // MODIFIES: pets
