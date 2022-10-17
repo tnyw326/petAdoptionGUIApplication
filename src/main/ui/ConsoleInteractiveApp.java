@@ -102,7 +102,6 @@ public class ConsoleInteractiveApp {
         System.out.println("Do you have a pet for adoption or do you want to adopt a pet?");
         System.out.println("p - posting a pet for adoption");
         System.out.println("a - adopting a pet");
-        System.out.println("s - select a pet and view it's information");
         System.out.println("q - quit");
     }
 

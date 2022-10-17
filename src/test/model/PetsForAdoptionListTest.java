@@ -67,14 +67,4 @@ public class PetsForAdoptionListTest {
         testList.adoptPet("coco");
         assertEquals(0, testList.getSize());
     }
-
-    @Test
-    void testSelectAndViewPet() {
-        testList.addPet(coco);
-        testList.addPet(fido);
-        testList.addPet(gucci);
-        assertEquals(coco, testList.selectAndViewPet("coco"));
-        assertEquals(fido, testList.selectAndViewPet("fido"));
-        assertEquals(gucci, testList.selectAndViewPet("gucci"));
-    }
 }

@@ -35,18 +35,6 @@ public class PetsForAdoptionList {
         }
     }
 
-    /*
-     * EFFECTS: show info about the selected pet
-     */
-    public Pet selectAndViewPet(String name) {
-        for (Pet pet : pets) {
-            if (pet.getName() == name) {
-                return pet;
-            }
-        }
-        return null;
-    }
-
     public int getSize() {
         return pets.size();
     }
