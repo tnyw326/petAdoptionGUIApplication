@@ -109,7 +109,7 @@ public class ConsoleInteractiveApp {
     private void printPets() {
         for (int i = 0; i < pets.getSize(); i++) {
             System.out.println(pets.getPet(i).getName() + "(" + pets.getPet(i).getSpecie() + ") "
-                    + ", breed:  " + pets.getPet(i).getBreed());
+                    + ", breed:  " + pets.getPet(i).getBreed() + ", age: " + pets.getPet(i).getAge());
         }
     }
 }
