@@ -3,7 +3,7 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PetsForAdoptionListTest {
     private PetsForAdoptionList testList;
@@ -66,5 +66,16 @@ public class PetsForAdoptionListTest {
     void testAdoptPetFromEmptyList() {
         testList.adoptPet("coco");
         assertEquals(0, testList.getSize());
+    }
+
+    @Test
+    void testContainsPet() {
+        testList.addPet(coco);
+        testList.addPet(fido);
+        testList.addPet(gucci);
+        assertTrue(testList.containsPet("coco"));
+        assertTrue(testList.containsPet("fido"));
+        assertTrue(testList.containsPet("gucci"));
+        assertFalse(testList.containsPet("lucky"));
     }
 }

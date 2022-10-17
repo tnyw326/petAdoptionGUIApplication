@@ -36,6 +36,20 @@ public class PetsForAdoptionList {
         }
     }
 
+    /*
+     * MODIFIES: this
+     * EFFECTS: return true if pet is contained in list, else return false
+     */
+    public Boolean containsPet(String name) {
+        for (int i = 0; i < pets.size(); i++) {
+            String petName = pets.get(i).getName();
+            if (name == petName) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public int getSize() {
         return pets.size();
     }

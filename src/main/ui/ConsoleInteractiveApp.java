@@ -73,8 +73,12 @@ public class ConsoleInteractiveApp {
         printPets();
         System.out.println("\nplease enter the name of the pet that you want to adopt");
         String nameOfPetInterested = input.next();
-        pets.adoptPet(nameOfPetInterested);
-        System.out.println("Congratulations! You've adopted a pet!");
+        if (pets.containsPet(nameOfPetInterested)) {
+            pets.adoptPet(nameOfPetInterested);
+            System.out.println("Congratulations! You've adopted " + nameOfPetInterested);
+        } else {
+            System.out.println("Sorry, " + nameOfPetInterested + " does not seem to appear in the list");
+        }
     }
 
     // MODIFIES: pets
@@ -112,3 +116,4 @@ public class ConsoleInteractiveApp {
         }
     }
 }
+
