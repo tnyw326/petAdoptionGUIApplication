@@ -6,9 +6,6 @@ public class Pet {
     private String specie;        // pet's specie
     private String breed;         // pet's breed
     private int age;              // pet's age
-    private int ageConsideredOld = 9; // the threshold of a pet when it is considered old
-
-
 
     /*
      * REQUIRES: name has a non-zero length
