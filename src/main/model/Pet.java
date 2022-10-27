@@ -1,7 +1,12 @@
 package model;
 
+import persistence.Writable;
+
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represents an animal with information including name, species, age
-public class Pet {
+public class Pet implements Writable {
     private String name;          // pet's name
     private String specie;        // pet's specie
     private String breed;         // pet's breed
@@ -36,5 +41,15 @@ public class Pet {
 
     public int getAge() {
         return age;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("specie", specie);
+        json.put("breed", breed);
+        json.put("age", age);
+        return json;
     }
 }

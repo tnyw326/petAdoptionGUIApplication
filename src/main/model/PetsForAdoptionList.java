@@ -1,9 +1,13 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 
 // Represents a list of pets that are available for adoption
-public class PetsForAdoptionList {
+public class PetsForAdoptionList implements Writable {
     ArrayList<Pet> pets;
 
     public PetsForAdoptionList() {
@@ -30,7 +34,7 @@ public class PetsForAdoptionList {
     public void adoptPet(String name) {
         for (int i = 0; i < pets.size(); i++) {
             String petName = pets.get(i).getName();
-            if (name == petName) {
+            if (name.equals(petName)) {
                 pets.remove(i);
             }
         }
@@ -43,7 +47,7 @@ public class PetsForAdoptionList {
     public Boolean containsPet(String name) {
         for (int i = 0; i < pets.size(); i++) {
             String petName = pets.get(i).getName();
-            if (name == petName) {
+            if (name.equals(petName)) {
                 return true;
             }
         }
@@ -56,5 +60,23 @@ public class PetsForAdoptionList {
 
     public Pet getPet(int num) {
         return pets.get(num);
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("pets", petsToJson());
+        return json;
+    }
+
+    // EFFECTS: returns things in this workroom as a JSON array
+    private JSONArray petsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Pet p : pets) {
+            jsonArray.put(p.toJson());
+        }
+
+        return jsonArray;
     }
 }
