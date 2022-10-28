@@ -20,5 +20,4 @@ class PetTest {
         assertEquals("poodle", testPet.getBreed());
         assertEquals(1,testPet.getAge());
     }
-
 }

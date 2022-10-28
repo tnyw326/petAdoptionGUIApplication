@@ -24,23 +24,13 @@ public class PetsForAdoptionListTest {
         testList.addPet(coco);
         assertEquals(1, testList.getSize());
         assertEquals(coco, testList.getPet(0));
-
+        testList.addPet(coco);
+        assertEquals(1, testList.getSize());
+        assertEquals(coco, testList.getPet(0));
     }
 
     @Test
     void testAddPetBiggerSize() {
-        testList.addPet(coco);
-        testList.addPet(fido);
-        testList.addPet(gucci);
-        assertEquals(3, testList.getSize());
-        assertEquals(coco, testList.getPet(0));
-        assertEquals(fido, testList.getPet(1));
-        assertEquals(gucci, testList.getPet(2));
-        assertEquals(3, testList.getSize());
-    }
-
-    @Test
-    void testAddPetAlreadyThere() {
         testList.addPet(coco);
         testList.addPet(fido);
         testList.addPet(gucci);
