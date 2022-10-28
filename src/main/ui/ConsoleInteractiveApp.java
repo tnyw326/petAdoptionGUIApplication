@@ -7,6 +7,7 @@ import persistence.JsonWriter;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Scanner;
 
 
@@ -71,15 +72,19 @@ public class ConsoleInteractiveApp {
 
     // EFFECTS: view the list of pet
     private void viewList() {
-        printPets();
+        if (pets.getSize() > 0) {
+            printPets();
+        } else {
+            System.out.println("Sorry, we currently have no available pets for adoption!");
+        }
     }
 
     // MODIFIES: pets
     // EFFECTS: remove the selected pet from pets
     private void adoptPetFromPets() {
-        System.out.println("here are the pets that are available for adoption: ");
+        System.out.println("Here are the pets that are available for adoption: ");
         printPets();
-        System.out.println("\nplease enter the name of the pet that you want to adopt");
+        System.out.println("\nPlease enter the name of the pet that you want to adopt");
         String nameOfPetInterested = input.next();
         if (pets.containsPet(nameOfPetInterested)) {
             pets.adoptPet(nameOfPetInterested);
@@ -93,28 +98,32 @@ public class ConsoleInteractiveApp {
     // EFFECTS: create a pet with given information and add it
     //          to the petList
     private void createPet() {
-        System.out.println("what is the name of your pet?");
-        String nameOfPet = input.next();
-        System.out.println("what is the specie of your pet?");
-        String specieOfPet = input.next();
-        System.out.println("what is the breed of your pet?");
-        String breedOfPet = input.next();
-        System.out.println("how old is your pet?(enter a whole number)");
+        System.out.println("What is the name of your pet?");
+        String nameOfPet = input.next().toLowerCase();
+        System.out.println("What is the specie of your pet?");
+        String specieOfPet = input.next().toLowerCase();
+        System.out.println("What is the breed of your pet?");
+        String breedOfPet = input.next().toLowerCase();
+        System.out.println("How old is your pet?(enter a whole number)");
         int ageOfPet = input.nextInt();
 
         Pet pet = new Pet(nameOfPet, specieOfPet, breedOfPet, ageOfPet);
-        pets.addPet(pet);
-
-        System.out.println("\nnice! you've added your pet to our list, hope your pet will be adopted soon!");
+        if (pets.containsPet(pet.getName())) {
+            System.out.println("Sorry, there exist a pet with the same name as your pet, please add a number to "
+                    + "the end of your pet name so we can add it to the list");
+        } else {
+            pets.addPet(pet);
+            System.out.println("\nnice! you've added your pet to our list, hope your pet will be adopted soon!");
+        }
     }
 
     // EFFECTS: display all the valid commands
     private void showOptions() {
         System.out.println("\nDo you have a pet for adoption or do you want to adopt a pet?");
-        System.out.println("\tp - posting a pet for adoption");
-        System.out.println("\ta - adopting a pet");
-        System.out.println("\tv - view the list of pets");
-        System.out.println("\tq - quit");
+        System.out.println("\tp - Posting a pet for adoption");
+        System.out.println("\ta - Adopting a pet");
+        System.out.println("\tv - View the list of pets");
+        System.out.println("\tq - Quit");
     }
 
     // EFFECTS: print each pet's name, specie and breed
