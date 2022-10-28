@@ -27,5 +27,9 @@ I am interested of making this project because I love animals and I really want 
 - as a user, I want to be able to select an animal for adoption
 - as a user, I want to be able to view a list of animals on my application
 - as a user, I want to be able to remove an animal from the list once it is adopted
+- as a user, I want to be able to have my application automatically saves all changes made
+- as a user, I want to be able to load my application with same date saved from last use
 
+**Citation**
 
+- Codes and tests in persistence package are based on the WorkRoom Demo provided in CPSC210
