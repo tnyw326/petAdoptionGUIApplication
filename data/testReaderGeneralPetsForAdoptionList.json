@@ -1,0 +1,16 @@
+{
+    "pets": [
+      {
+        "name": "coco",
+        "specie": "dog",
+        "breed": "poodle",
+        "age": 1
+      },
+      {
+        "name": "fido",
+        "specie": "dog",
+        "breed": "husky",
+        "age": 3
+      }
+    ]
+}

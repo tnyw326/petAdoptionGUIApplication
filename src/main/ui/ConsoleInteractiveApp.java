@@ -2,19 +2,27 @@ package ui;
 
 import model.Pet;
 import model.PetsForAdoptionList;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
-import java.util.stream.StreamSupport;
+
 
 // The console based application for pets adoption
 public class ConsoleInteractiveApp {
+    private static final String JSON_STORE = "./data/petsforadoptionlist.json";
     private PetsForAdoptionList pets;
     private Scanner input;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: run the application
-    public ConsoleInteractiveApp() {
+    public ConsoleInteractiveApp() throws FileNotFoundException {
+        pets = new PetsForAdoptionList();
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runApp();
     }
 
@@ -28,8 +36,10 @@ public class ConsoleInteractiveApp {
         while (keepGoing) {
             showOptions();
             command = input.next();
+            command = command.toLowerCase();
 
             if (command.equals("q")) {
+                savePetsForAdoptionList();
                 keepGoing = false;
             } else {
                 runCommand(command);
@@ -42,16 +52,7 @@ public class ConsoleInteractiveApp {
     // MODIFIES: this and pets
     // EFFECTS: initializes the list of pets for adoption
     public void initializeApp() {
-        Pet coco = new Pet("coco", "dog", "golden retriever", 4);
-        Pet lucky = new Pet("lucky", "dog", "poodle", 3);
-        Pet odin = new Pet("odin", "cat", "british shorthair", 7);
-        Pet teddy = new Pet("teddy", "dog", "husky", 2);
-
-        pets = new PetsForAdoptionList();
-        pets.addPet(coco);
-        pets.addPet(lucky);
-        pets.addPet(odin);
-        pets.addPet(teddy);
+        loadPetsForAdoptionList();
 
         input = new Scanner(System.in);
     }
@@ -104,16 +105,16 @@ public class ConsoleInteractiveApp {
         Pet pet = new Pet(nameOfPet, specieOfPet, breedOfPet, ageOfPet);
         pets.addPet(pet);
 
-        System.out.println("nice! you've successfully added your pet to our list, hope your pet will be adopted soon!");
+        System.out.println("\nnice! you've added your pet to our list, hope your pet will be adopted soon!");
     }
 
     // EFFECTS: display all the valid commands
     private void showOptions() {
-        System.out.println("Do you have a pet for adoption or do you want to adopt a pet?");
-        System.out.println("p - posting a pet for adoption");
-        System.out.println("a - adopting a pet");
-        System.out.println("v - view the list of pets");
-        System.out.println("q - quit");
+        System.out.println("\nDo you have a pet for adoption or do you want to adopt a pet?");
+        System.out.println("\tp - posting a pet for adoption");
+        System.out.println("\ta - adopting a pet");
+        System.out.println("\tv - view the list of pets");
+        System.out.println("\tq - quit");
     }
 
     // EFFECTS: print each pet's name, specie and breed
@@ -121,6 +122,29 @@ public class ConsoleInteractiveApp {
         for (int i = 0; i < pets.getSize(); i++) {
             System.out.println(pets.getPet(i).getName() + "(" + pets.getPet(i).getSpecie() + ") "
                     + ", breed:  " + pets.getPet(i).getBreed() + ", age: " + pets.getPet(i).getAge());
+        }
+    }
+
+    // EFFECTS: saves the pets for adoption list to file
+    private void savePetsForAdoptionList() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(pets);
+            jsonWriter.close();
+            System.out.println("Saved data to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads pets for adoption list from file
+    private void loadPetsForAdoptionList() {
+        try {
+            pets = jsonReader.read();
+            System.out.println("Loaded data from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
 }

@@ -29,7 +29,6 @@ public class JsonReader {
 
     // EFFECTS: parses pet for adoption list from JSON object and returns it
     private PetsForAdoptionList parsePetForAdoptionList(JSONObject jsonObject) {
-        String name = jsonObject.getString("name");
         PetsForAdoptionList pl = new PetsForAdoptionList();
         addPets(pl, jsonObject);
         return pl;
@@ -45,6 +44,7 @@ public class JsonReader {
         }
     }
 
+    // EFFECTS: reads source file as string and returns it
     private String readFile(String source) throws  IOException {
         StringBuilder contentBuilder = new StringBuilder();
 
@@ -65,5 +65,4 @@ public class JsonReader {
         Pet pet = new Pet(name, specie,breed, age);
         pl.addPet(pet);
     }
-
 }

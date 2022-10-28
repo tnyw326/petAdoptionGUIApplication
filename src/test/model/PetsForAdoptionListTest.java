@@ -78,4 +78,21 @@ public class PetsForAdoptionListTest {
         assertTrue(testList.containsPet("gucci"));
         assertFalse(testList.containsPet("lucky"));
     }
+
+    @Test
+    void testGetSize() {
+        assertEquals(0, testList.getSize());
+        testList.addPet(coco);
+        assertEquals(1, testList.getSize());
+    }
+
+    @Test
+    void testGetPet() {
+        testList.addPet(coco);
+        testList.addPet(fido);
+        testList.addPet(gucci);
+        assertEquals(coco, testList.getPet(0));
+        assertEquals(fido, testList.getPet(1));
+        assertEquals(gucci, testList.getPet(2));
+    }
 }
