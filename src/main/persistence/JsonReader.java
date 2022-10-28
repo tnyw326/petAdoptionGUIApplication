@@ -20,7 +20,8 @@ public class JsonReader {
         this.source = source;
     }
 
-    // EFFECTS: constructs a reader to read file
+    // EFFECTS: reads pets for adoption list from file and returns it;
+    // throws IOException if an error occurs reading data from file
     public PetsForAdoptionList read() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);

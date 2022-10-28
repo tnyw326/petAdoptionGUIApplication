@@ -1,14 +1,15 @@
 package persistence;
 
-import model.Pet;
 import model.PetsForAdoptionList;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class JsonReaderTest extends JsonTest {
+class JsonReaderTest extends JsonTest {
+
     @Test
     void testReaderNonExistentFile() {
         JsonReader reader = new JsonReader("./data/noSuchFile.json");
@@ -21,7 +22,7 @@ public class JsonReaderTest extends JsonTest {
     }
 
     @Test
-    void testReaderEmptyPetsForAdoptionList() {
+    void testReaderEmptyPetForAdoptionList() {
         JsonReader reader = new JsonReader("./data/testReaderEmptyPetsForAdoptionList.json");
         try {
             PetsForAdoptionList pl = reader.read();
@@ -32,7 +33,7 @@ public class JsonReaderTest extends JsonTest {
     }
 
     @Test
-    void testReaderGeneralPetsForAdoptionList() {
+    void testReaderGeneralPetForAdoptionList() {
         JsonReader reader = new JsonReader("./data/testReaderGeneralPetsForAdoptionList.json");
         try {
             PetsForAdoptionList pl = reader.read();
