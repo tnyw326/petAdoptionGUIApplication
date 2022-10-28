@@ -3,7 +3,6 @@ package model;
 import persistence.Writable;
 
 import org.json.JSONObject;
-import persistence.Writable;
 
 // Represents an animal with information including name, species, age
 public class Pet implements Writable {
