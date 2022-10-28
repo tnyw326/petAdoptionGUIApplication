@@ -12,6 +12,7 @@ import java.util.stream.Stream;
 import org.json.*;
 
 // Represents a reader that reads pets for adoption list from JSON data stored in file
+// Codes are based on the WorkRoom Demo provided in CPSC210
 public class JsonReader {
     private String source;
 

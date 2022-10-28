@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import java.io.*;
 
 // Represents a writer that writes JSON representation of pets for adoption list to file
+// Codes are based on the WorkRoom Demo provided in CPSC210
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;
