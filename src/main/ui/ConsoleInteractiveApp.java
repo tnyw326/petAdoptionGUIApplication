@@ -134,7 +134,7 @@ public class ConsoleInteractiveApp {
     }
 
     // EFFECTS: saves the pets for adoption list to file
-    private void savePetsForAdoptionList() {
+    public void savePetsForAdoptionList() {
         try {
             jsonWriter.open();
             jsonWriter.write(pets);
@@ -145,7 +145,6 @@ public class ConsoleInteractiveApp {
         }
     }
 
-    // MODIFIES: this
     // EFFECTS: loads pets for adoption list from file
     private void loadPetsForAdoptionList() {
         try {
