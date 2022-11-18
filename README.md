@@ -33,3 +33,14 @@ I am interested of making this project because I love animals and I really want 
 **Citation**
 
 - Codes and tests in persistence package are based on the WorkRoom Demo provided in CPSC210
+
+# Instructions for Grader
+
+- You can generate the first required event related to adding Xs to a Y by providing required information to the 
+associated text field and clicking the "Post pet" button
+- You can generate the second required event related to adding Xs to a Y by clicking the "Adopt pet" button and provide
+the pet's name in the corresponding text field
+- You can locate my visual component by clicking "Adopt pet"/"Post pet" button, which will display a picture at the 
+bottom of the GUI window
+- You can save the state of my application by clicking the menu item "save" in the "File" menu in the menu bar
+- You can reload the state of my application by clicking the menu item "load" in the "File" menu in the menu bar
