@@ -5,7 +5,6 @@ import persistence.*;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.ImagingOpException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -72,8 +71,9 @@ public class PetAdoptionApp extends JFrame {
 
     // EFFECTS: helper to assign image to label
     private void loadImage() {
-        ImageIcon dogImage = new ImageIcon("pexels-kampus-production-8734473.jpg");
+        ImageIcon dogImage = new ImageIcon("dogImage.png");
         labelImage = new JLabel(dogImage);
+        labelImage.setVisible(false);
         dogImage.setImage(dogImage.getImage().getScaledInstance(200,200,Image.SCALE_DEFAULT));
     }
 
@@ -125,6 +125,7 @@ public class PetAdoptionApp extends JFrame {
         public void actionPerformed(ActionEvent e) {
             pets.adoptPet(textFieldNameOfPetWanted.getText());
             labelDisplayList.setText(setDisplayName());
+            labelImage.setVisible(true);
         }
     }
 
@@ -154,6 +155,7 @@ public class PetAdoptionApp extends JFrame {
             Pet pet = new Pet(name, specie, breed, age);
             pets.addPet(pet);
             labelDisplayList.setText(setDisplayName());
+            labelImage.setVisible(true);
         }
     }
 
