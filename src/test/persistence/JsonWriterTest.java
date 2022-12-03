@@ -9,6 +9,7 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+// unit test for JsonWriter class
 public class JsonWriterTest extends JsonTest {
 
     @Test

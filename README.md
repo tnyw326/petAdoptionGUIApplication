@@ -44,3 +44,22 @@ the pet's name in the corresponding text field
 bottom of the GUI window
 - You can save the state of my application by clicking the menu item "save" in the "File" menu in the menu bar
 - You can reload the state of my application by clicking the menu item "load" in the "File" menu in the menu bar
+
+# Phase 4: Task 2
+
+- Fri Dec 02 16:12:01 PST 2022
+
+  added Coco(Dog) for adoption
+
+- Fri Dec 02 16:12:19 PST 2022
+
+  added Fido(Cat) for adoption
+
+- Fri Dec 02 16:12:22 PST 2022
+
+  adopted Coco from PetAdoptionApp
+
+- Fri Dec 02 16:12:25 PST 2022
+
+  adopted Fido from PetAdoptionApp
+ 

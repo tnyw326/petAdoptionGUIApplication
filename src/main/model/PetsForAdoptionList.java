@@ -23,6 +23,8 @@ public class PetsForAdoptionList implements Writable {
     public void addPet(Pet pet) {
         if (!pets.contains(pet)) {
             pets.add(pet);
+            EventLog.getInstance().logEvent(new Event("added " + pet.getName() + "(" + pet.getSpecie() + ")"
+                    + " for adoption"));
         }
     }
 
@@ -36,6 +38,7 @@ public class PetsForAdoptionList implements Writable {
             String petName = pets.get(i).getName();
             if (name.equals(petName)) {
                 pets.remove(i);
+                EventLog.getInstance().logEvent(new Event("adopted " + petName + " from PetAdoptionApp"));
             }
         }
     }

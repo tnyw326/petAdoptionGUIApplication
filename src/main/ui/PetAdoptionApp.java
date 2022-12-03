@@ -1,6 +1,7 @@
 package ui;
 
 import model.*;
+import model.Event;
 import persistence.*;
 
 import java.awt.*;
@@ -20,15 +21,16 @@ public class PetAdoptionApp extends JFrame {
     private static final int LABEL_HEIGHT = 20;
     private static final int TEXT_FIELD_WIDTH = 150;
     private static final int TEXT_FIELD_HEIGHT = 20;
-    private JFrame frame;
-    private JPanel panel;
+    private final JFrame frame;
+    private final JPanel panel;
     private PetsForAdoptionList pets;
     JLabel labelName = new JLabel("Name: ");
     JLabel labelSpecie = new JLabel("Specie: ");
     JLabel labelBreed = new JLabel("Breed: ");
     JLabel labelAge = new JLabel("Age: ");
     JLabel labelNameOfPetWanted = new JLabel("Name of pet you want to adopt: ");
-    JLabel labelDisplayList = new JLabel();
+    JLabel labelDisplayPetList = new JLabel();
+    JLabel labelDisplayEventLog = new JLabel();
     JTextField textFieldName = new JTextField();
     JTextField textFieldSpecie = new JTextField();
     JTextField textFieldBreed = new JTextField();
@@ -36,14 +38,17 @@ public class PetAdoptionApp extends JFrame {
     JTextField textFieldNameOfPetWanted = new JTextField();
     JButton buttonAdopt = new JButton(new AdoptPetAction());
     JButton buttonPost = new JButton(new AddPetAction());
-    private JMenu menu;
-    private JMenuItem save;
-    private JMenuItem load;
-    private JMenuBar menuBar;
-    private JsonWriter jsonWriter;
-    private JsonReader jsonReader;
+    JButton buttonPrintLog = new JButton(new PrintLogAction());
+    JButton buttonHideEventLog = new JButton(new HideEventLogAction());
+    private final JMenu menu;
+    private final JMenuItem save;
+    private final JMenuItem load;
+    private final JMenuBar menuBar;
+    private final JsonWriter jsonWriter;
+    private final JsonReader jsonReader;
     private JLabel labelImage;
     private static final String JSON_STORE = "./data/petsforadoptionlist.json";
+    private EventLog el;
 
     public PetAdoptionApp() {
         jsonWriter = new JsonWriter(JSON_STORE);
@@ -67,7 +72,24 @@ public class PetAdoptionApp extends JFrame {
         setObjectsSize();
         panelAdd();
         frame.setVisible(true);
+        setWindowCloseEvent();
     }
+
+    // EFFECTS: print EventLog to console
+    private void setWindowCloseEvent() {
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                for (Event event : EventLog.getInstance()) {
+                    System.out.println(event.getDate());
+                    System.out.println(event.getDescription());
+                    System.out.println(" ");
+                }
+            }
+        });
+    }
+
 
     // EFFECTS: helper to assign image to label
     private void loadImage() {
@@ -84,7 +106,8 @@ public class PetAdoptionApp extends JFrame {
         panel.add(labelBreed);
         panel.add(labelAge);
         panel.add(labelNameOfPetWanted);
-        panel.add(labelDisplayList);
+        panel.add(labelDisplayPetList);
+        panel.add(labelDisplayEventLog);
         panel.add(textFieldName);
         panel.add(textFieldSpecie);
         panel.add(textFieldBreed);
@@ -94,6 +117,8 @@ public class PetAdoptionApp extends JFrame {
         panel.add(buttonPost);
         panel.add(menuBar);
         panel.add(labelImage);
+        panel.add(buttonPrintLog);
+        panel.add(buttonHideEventLog);
     }
 
     // EFFECTS: set all the button, label, text field, and menu objects size
@@ -103,7 +128,8 @@ public class PetAdoptionApp extends JFrame {
         labelBreed.setBounds(300, 390, LABEL_WIDTH, LABEL_HEIGHT);
         labelAge.setBounds(300, 420, LABEL_WIDTH, LABEL_HEIGHT);
         labelNameOfPetWanted.setBounds(220, 200, 210, LABEL_HEIGHT);
-        labelDisplayList.setBounds(220,30, 580, 170);
+        labelDisplayPetList.setBounds(220,30, 580, 170);
+        labelDisplayEventLog.setBounds(550, 240, BUTTON_WIDTH * 2, 300);
         labelImage.setBounds(300, 470,200,200);
         textFieldName.setBounds(350, 330, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT);
         textFieldSpecie.setBounds(350, 360, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT);
@@ -112,7 +138,45 @@ public class PetAdoptionApp extends JFrame {
         textFieldNameOfPetWanted.setBounds(430, 200, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT);
         buttonAdopt.setBounds(400, 450, BUTTON_WIDTH, BUTTON_HEIGHT);
         buttonPost.setBounds(300, 450, BUTTON_WIDTH, BUTTON_HEIGHT);
+        buttonPrintLog.setBounds(550, 550, BUTTON_WIDTH * 2, BUTTON_HEIGHT);
+        buttonHideEventLog.setBounds(550, 550 + BUTTON_HEIGHT, BUTTON_WIDTH * 2, BUTTON_HEIGHT);
         menuBar.setBounds(0,0,WIDTH,20);
+    }
+
+    // EFFECTS: print event log once print log button is clicked
+    private class PrintLogAction extends AbstractAction {
+        PrintLogAction() {
+            super("Print log");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            labelDisplayEventLog.setText(setDisplayLog());
+        }
+    }
+
+    // EFFECTS: hide the event log from the window
+    private class HideEventLogAction extends AbstractAction {
+        HideEventLogAction() {
+            super("Hide event log");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            labelDisplayEventLog.setText(" ");
+        }
+    }
+
+    // EFFECTS: set the display label to print the event log
+    private String setDisplayLog() {
+        el = EventLog.getInstance();
+        String s = " ";
+        for (Event event : el) {
+            s = "<html><body>" + s + "<br>" + event.getDate() + "<br>"
+                    + event.getDescription() + "<br>" + " " +  "<html><body>";
+        }
+        return s;
+
     }
 
     // EFFECTS: adopt pet with name entered and once adopt pet button is clicked
@@ -124,7 +188,7 @@ public class PetAdoptionApp extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             pets.adoptPet(textFieldNameOfPetWanted.getText());
-            labelDisplayList.setText(setDisplayName());
+            labelDisplayPetList.setText(setDisplayName());
             labelImage.setVisible(true);
         }
     }
@@ -154,7 +218,7 @@ public class PetAdoptionApp extends JFrame {
             int age = Integer.valueOf(textFieldAge.getText());
             Pet pet = new Pet(name, specie, breed, age);
             pets.addPet(pet);
-            labelDisplayList.setText(setDisplayName());
+            labelDisplayPetList.setText(setDisplayName());
             labelImage.setVisible(true);
         }
     }
@@ -203,7 +267,7 @@ public class PetAdoptionApp extends JFrame {
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
-        labelDisplayList.setText(setDisplayName());
+        labelDisplayPetList.setText(setDisplayName());
     }
 
     public static void main(String[] args) {

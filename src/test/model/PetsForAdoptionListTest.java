@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// unit test for PetsForAdoption class
 public class PetsForAdoptionListTest {
     private PetsForAdoptionList testList;
     private Pet coco;
