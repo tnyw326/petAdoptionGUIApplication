@@ -62,4 +62,10 @@ bottom of the GUI window
 - Fri Dec 02 16:12:25 PST 2022
 
   adopted Fido from PetAdoptionApp
- 
+
+# Phase 4: Task 3
+
+if I had more time, I would do the following refractoring to increase cohesion of readibility of my code:
+- use singleton design patter for my PetsForAdoptionList class, because throughout the whole app(GUI), only one of 
+petsForAdoptionList instance is needed
+- use exceptions in my classes to make my classes robust
