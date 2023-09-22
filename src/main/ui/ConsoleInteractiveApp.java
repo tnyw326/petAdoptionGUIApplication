@@ -68,7 +68,6 @@ public class ConsoleInteractiveApp {
             viewList();
         }
     }
-
     // EFFECTS: view the list of pet
     private void viewList() {
         if (pets.getSize() > 0) {
